@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class DAO {
+	public static final String JBDC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost:3306/?user=root&autoReconnect=true&useSSL=false";
 	static final String USER = "root";
 	static final String PASSWORD = "root";
@@ -20,10 +21,13 @@ public class DAO {
 
 	public static void connToDB() {
 		try {
+			Class.forName(JBDC_DRIVER);
+			
 			System.out.println("Connecting to the database");
 			CONN = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 			System.out.println("Connected to the database");
-		} catch (SQLException e) {
+			System.out.println("");
+		} catch (SQLException | ClassNotFoundException e) {
 			System.out.println("Database connection failed.");
 			e.printStackTrace();
 		}
@@ -83,13 +87,18 @@ public class DAO {
 		}
 	}// find individual method
 
-	public static void addToDB(String userName, String realName, String email, String age) {
+	public static void addToDB(Users user) {
 		connToDB();
 
 		try {
-			STMT = CONN.createStatement();
-			STMT.executeUpdate("INSERT INTO username_info.users (`username`,`realname`,`email`,`age`)" + "VALUES ('"
-					+ userName + "', '" + realName + "', '" + email + "', '" + age + "');");
+
+			PREP_STMT = CONN.prepareStatement(insertToTable);
+			PREP_STMT.setString(1, user.getUserName());
+			PREP_STMT.setString(2, user.getRealName());
+			PREP_STMT.setString(3, user.getEmail());
+			PREP_STMT.setString(4, user.getAge());
+			
+			PREP_STMT.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -113,13 +122,17 @@ public class DAO {
 
 		try {
 			STMT = CONN.createStatement();
-			STMT.executeUpdate("UPDATE username_info.users SET username = '" + userName + "', realname = '"
-					+ realName + "', email = '" + email + "', age = '" + age + "' WHERE user_id = '" + userID
-					+ "';");
+			STMT.executeUpdate("UPDATE username_info.users SET username = '" + userName + "', realname = '" + realName
+					+ "', email = '" + email + "', age = '" + age + "' WHERE user_id = '" + userID + "';");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}// update method
+
+	private static String insertToTable = "INSERT INTO `username_info`.`users` "
+		+ "(username, realname, email, age)"
+		+ " VALUES "
+		+ "(?, ?, ?, ?);";
 
 }// class

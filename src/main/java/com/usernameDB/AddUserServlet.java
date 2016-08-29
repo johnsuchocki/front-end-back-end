@@ -39,6 +39,12 @@ public class AddUserServlet extends HttpServlet {
 		addToDBUser.setRealName(request.getParameter("firstname"));
 		addToDBUser.setEmail(request.getParameter("email"));
 		addToDBUser.setAge(request.getParameter("age"));
+	
+		System.out.println(addToDBUser.toString());
+		
+		DAO.addToDB(addToDBUser);
+		
+		request.getRequestDispatcher("index.html").forward(request, response);
 	}
 
 }
