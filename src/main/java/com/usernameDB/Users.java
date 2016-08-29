@@ -2,21 +2,21 @@ package com.usernameDB;
 
 public class Users {
 
-	int userID = 0;
-	String userName = null;
-	String realName = null;
-	String email = null;
-	int age = 0;
+	private String userID = null;
+	private String userName = null;
+	private String realName = null;
+	private String email = null;
+	private String age = null;
 
 	public Users() {
 		super();
 	}
 
-	public int getUserID() {
+	public String getUserID() {
 		return userID;
 	}
 	
-	public void setUserID(int userID) {
+	public void setUserID(String userID) {
 		this.userID = userID;
 	}
 
@@ -44,11 +44,11 @@ public class Users {
 		this.email = email;
 	}
 
-	public int getAge() {
+	public String getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(String age) {
 		this.age = age;
 	}
 

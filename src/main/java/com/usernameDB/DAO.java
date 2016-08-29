@@ -41,11 +41,11 @@ public class DAO {
 			while (RES_SET.next()) {
 				Users usersInDB = new Users();
 
-				usersInDB.setUserID(RES_SET.getInt("user_id"));
+				usersInDB.setUserID(RES_SET.getString("user_id"));
 				usersInDB.setUserName(RES_SET.getString("username"));
 				usersInDB.setRealName(RES_SET.getString("realname"));
 				usersInDB.setEmail(RES_SET.getString("email"));
-				usersInDB.setAge(RES_SET.getInt("age"));
+				usersInDB.setAge(RES_SET.getString("age"));
 
 				allUsers.add(usersInDB);
 			}
@@ -70,18 +70,17 @@ public class DAO {
 			Users userInDB = new Users();
 
 			while (RES_SET.next()) {
-				userInDB.setUserID(RES_SET.getInt("user_id"));
+				userInDB.setUserID(RES_SET.getString("user_id"));
 				userInDB.setUserName(RES_SET.getString("username"));
 				userInDB.setRealName(RES_SET.getString("realname"));
 				userInDB.setEmail(RES_SET.getString("email"));
-				userInDB.setAge(RES_SET.getInt("age"));
+				userInDB.setAge(RES_SET.getString("age"));
 
 				System.out.println(userInDB.toString());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}// find individual method
 
 	public static void addToDB(String userName, String realName, String email, String age) {
@@ -97,24 +96,24 @@ public class DAO {
 		}
 	}// add method
 
-	public static void deleteFromDB(String userName) {
+	public static void deleteFromDB(String userID) {
 		connToDB();
 
 		try {
 			STMT = CONN.createStatement();
-			STMT.executeUpdate("DELETE FROM username_info.users WHERE username = '" + userName + "';");
+			STMT.executeUpdate("DELETE FROM username_info.users WHERE user_id = '" + userID + "';");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}// delete method
 
-	public static void updateDB(String userID, String newUserName, String realName, String email, String age) {
+	public static void updateDB(String userID, String userName, String realName, String email, String age) {
 		connToDB();
 
 		try {
 			STMT = CONN.createStatement();
-			STMT.executeUpdate("UPDATE username_info.users SET username = '" + newUserName + "', realname = '"
+			STMT.executeUpdate("UPDATE username_info.users SET username = '" + userName + "', realname = '"
 					+ realName + "', email = '" + email + "', age = '" + age + "' WHERE user_id = '" + userID
 					+ "';");
 
