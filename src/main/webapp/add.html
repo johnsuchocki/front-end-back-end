@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<title>User Database Home Page</title>
+
+<!-- imports -->
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			
+			<!-- side bar -->
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar">
+					<li><a href="index.html">Home</a></li>
+					<li class="active"><a href="add.html">Add a user</a></li>
+				</ul>
+			</div>
+			
+			<!-- main content -->
+			<div class="col-sm-3">
+				<h2>Input new user info</h2>
+				<form class="form-group" action="" method="post">
+					<div class="form-group">
+						<label for="username">Username</label> <input type="text"
+							class="form-control" id="username" placeholder="username">
+					</div>
+					<div class="form-group">
+						<label for="firstname">First name</label> <input type="text"
+							class="form-control" id="firstname" placeholder="first name">
+					</div>
+					<div class="form-group">
+						<label for="email">Email</label> <input type="email"
+							class="form-control" id="email" placeholder="email">
+					</div>
+					<div class="form-group">
+						<label for="age">Age</label> <input type="number"
+							class="form-control" id="age" placeholder="age">
+					</div>
+					<input class="btn btn-default" type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
