@@ -8,18 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AddUserServlet
+ * Servlet implementation class DeleteUserServlet
  */
-@WebServlet("/AddUserServlet")
-public class AddUserServlet extends HttpServlet {
-	
-	Users addToDBUser = new Users();
+@WebServlet("/DeleteUserServlet")
+public class DeleteUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddUserServlet() {
+    public DeleteUserServlet() {
         super();
     }
 
@@ -35,14 +33,7 @@ public class AddUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		addToDBUser.setUserName(request.getParameter("username"));
-		addToDBUser.setRealName(request.getParameter("firstname"));
-		addToDBUser.setEmail(request.getParameter("email"));
-		addToDBUser.setAge(request.getParameter("age"));
-	
-		System.out.println(addToDBUser.toString());
-		
-		DAO.addToDB(addToDBUser);
+		DAO.deleteFromDB(request.getParameter("delete"));
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}

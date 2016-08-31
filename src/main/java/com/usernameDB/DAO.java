@@ -33,7 +33,7 @@ public class DAO {
 		}
 	}// connect method
 
-	public static void readFromDB() {
+	public static ArrayList<Users> readFromDB() {
 		ArrayList<Users> allUsers = new ArrayList<>();
 
 		connToDB();
@@ -61,6 +61,8 @@ public class DAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return allUsers;
 	}// read method
 
 	public static void findInDB(String userID) {
